@@ -20,7 +20,8 @@ def create_model(data):
     if data is not None:
         model = BERTopic(language="english", calculate_probabilities=True, verbose=True)
         topics, probs = model.fit_transform(data)
-        return model, topics, probs
+        #return model, topics, probs
+        return topics
     return None, None, None
 
 def main():

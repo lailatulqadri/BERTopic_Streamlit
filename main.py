@@ -21,6 +21,7 @@ def create_model(data, n_gram_range=(1, 3)):
     texts = data['text'].tolist()
     model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)
+    st.write(model.get_topic_info())
     joblib.dump(model, 'bertopic_model.pkl')
     return topics
 

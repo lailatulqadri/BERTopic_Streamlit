@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from bertopic import BERTopic
+import joblib
 
 # Load your data
 @st.cache_data
@@ -18,6 +19,7 @@ def create_model(data, n_gram_range=(1, 2)):
     texts = data['text'].tolist()
     model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)
+    joblib.dump(model, 'bertopic_model.pkl')
     return topics
 
 # Generate topics for the data

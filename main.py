@@ -21,13 +21,18 @@ def bertopic_wrapper(data):
     # Create BERTopic model instance (adjust parameters as needed)
     model = BERTopic(language="english", top_n_words=10, min_topic_size=3)
 
-    # Fit the model on the text data
-    topics, probs = model.fit_transform(data)
+    try:
+        # Fit the model on the text data
+        topics, probs = model.fit_transform(data)
 
-    # Create a DataFrame for topics and probabilities
-    topic_df = pd.DataFrame({"Topic": topics, "Probability": probs.max(axis=1)})
+        # Create a DataFrame for topics and probabilities
+        topic_df = pd.DataFrame({"Topic": topics, "Probability": probs.max(axis=1)})
 
-    return model, topic_df
+        return model, topic_df
+
+    except Exception as e:
+        st.error(f"An error occurred during BERTopic modeling: {e}")
+        return None, None  # Handle errors gracefully
 
 def main():
     """
@@ -54,20 +59,21 @@ def main():
             # Perform BERTopic modeling
             model, topic_df = bertopic_wrapper(text_data)
 
-            # Display results
-            st.subheader("Topics and Probabilities")
-            st.write(topic_df)
+            if model is not None:  # Check for successful modeling
+                # Display results
+                st.subheader("Topics and Probabilities")
+                st.write(topic_df)
 
-            # Optional visualizations (consider adding interactive charts)
-            # st.bar_chart(topic_df["Topic"].value_counts())
+                # Optional visualizations (consider adding interactive charts)
+                # st.bar_chart(topic_df["Topic"].value_counts())
 
-            # Allow downloading topics (consider using st.download_button)
-            # download_csv = st.button("Download Topics")
-            # if download_csv:
-            #     topic_df.to_csv("topics.csv", index=False)
+                # Allow downloading topics (consider using st.download_button)
+                # download_csv = st.button("Download Topics")
+                # if download_csv:
+                #     topic_df.to_csv("topics.csv", index=False)
 
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            st.error(f"An error occurred while processing the data: {e}")
 
 if __name__ == "__main__":
     main()

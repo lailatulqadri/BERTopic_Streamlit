@@ -5,7 +5,7 @@ from bertopic import BERTopic
 from sklearn.datasets import fetch_20newsgroups
 
 # Load your data
-@st.cache
+@st.cache(allow_output_mutation=True)
 def load_data():
     data = fetch_20newsgroups(subset='all')['data']
     return data

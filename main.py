@@ -54,3 +54,4 @@ if uploaded_file:
         data['topic'] = topics
         st.write("Data with topics:")
         st.write(data)
+        st.write(model.get_topic_info())

@@ -5,13 +5,13 @@ from bertopic import BERTopic
 from sklearn.datasets import fetch_20newsgroups
 
 # Load your data
-st.cache_data
+@st.cache_data
 def load_data():
     data = fetch_20newsgroups(subset='all')['data']
     return np.array(data)  # Convert list to numpy array
 
 # Perform BERTopic modeling
-st.cache_data(allow_output_mutation=True)
+@st.cache_data(allow_output_mutation=True)
 def create_model(data):
     model = BERTopic(language="english", calculate_probabilities=True, verbose=True)
     topics, probs = model.fit_transform(data.tolist())  # Convert numpy array back to list

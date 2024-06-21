@@ -5,11 +5,7 @@ import pandas as pd
 from bertopic import BERTopic
 import joblib
 
-import nltk
-@st.cache_resource
-nltk.download('stopwords')
-from nltk.corpus import stopwords
-stop = stopwords.words('english')
+
 
 # Load your data
 @st.cache_data
@@ -22,9 +18,6 @@ def load_data(uploaded_file):
 # Perform BERTopic modeling
 #@st.cache_resource
 def create_model(data, n_gram_range=(1, 3)):
-    df['text'] = df.text.str.replace("[^\w\s]", "").str.lower()
-    df['text'] = df['text'].apply(lambda x: ' '.join([item for item in x.split() if item not in stop]))
-
     texts = data['text'].tolist()
     model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)

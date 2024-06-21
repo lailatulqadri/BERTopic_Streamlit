@@ -31,6 +31,8 @@ def main():
 
     if data is not None:
         model, topics, probs = create_model(data)
+        st.write(model)
+        
 
         if model is not None:
             st.write('Number of topics:', model.get_topic_freq().shape[0] - 1)

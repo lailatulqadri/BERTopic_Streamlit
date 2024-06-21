@@ -11,7 +11,7 @@ def load_data():
     return np.array(data)  # Convert list to numpy array
 
 # Perform BERTopic modeling
-@st.cache_data
+@st.cache_resource
 def create_model(data):
     model = BERTopic(language="english", calculate_probabilities=True, verbose=True)
     topics, probs = model.fit_transform(data.tolist())  # Convert numpy array back to list

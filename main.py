@@ -8,10 +8,9 @@ from sklearn.datasets import fetch_20newsgroups
 # Load your data
 #@st.cache_data
 def load_data():
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
-        return data['text'].values.tolist()  # Replace 'column_name' with the name of the column that contains the text data
+        return data
     return None
 
 # Perform BERTopic modeling

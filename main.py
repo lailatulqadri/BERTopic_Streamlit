@@ -14,7 +14,7 @@ def load_data(uploaded_file):
 
 # Perform BERTopic modeling
 #@st.cache_resource
-def create_model(data, n_gram_range=(1, 1)):
+def create_model(data, n_gram_range=(1, 2)):
     texts = data['text'].tolist()
     model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)

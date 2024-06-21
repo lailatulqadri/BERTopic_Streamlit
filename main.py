@@ -19,7 +19,7 @@ def load_data():
 def create_model(data):
     # Asumsi bahwa data memiliki kolom 'text'
     texts = data['text'].tolist()
-    model = BERTopic(n_gram_range=n_gram_range)
+    model = BERTopic(n_gram_range=n_gram_range,calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)
     return topics
 

@@ -6,6 +6,7 @@ from bertopic import BERTopic
 import joblib
 
 import nltk
+@st.cache_resource
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 stop = stopwords.words('english')

@@ -3,11 +3,10 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from bertopic import BERTopic
-from sklearn.datasets import fetch_20newsgroups
 
 # Load your data
-#@st.cache_data
-def load_data():
+@st.cache_data
+def load_data(uploaded_file):
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
         return data
@@ -15,17 +14,22 @@ def load_data():
 
 # Perform BERTopic modeling
 @st.cache_resource
-def create_model(data):
-    # Asumsi bahwa data memiliki kolom 'text'
+def create_model(data, n_gram_range=(1, 1)):
     texts = data['text'].tolist()
-    model = BERTopic(n_gram_range=n_gram_range,calculate_probabilities=True)
+    model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
     topics, _ = model.fit_transform(texts)
+    return topics
+
+# Generate topics for the data
+def generate_topics(data):
+    n_gram_range = (1, 1)  # Adjust the n-gram range if necessary
+    topics = create_model(data, n_gram_range)
     return topics
 
 # Streamlit UI
 st.title('BERTopic with Streamlit')
 
-# Input teks dari user
+# Input text from user
 user_input = st.text_area("Enter text:")
 
 if user_input:
@@ -38,10 +42,11 @@ uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
 if uploaded_file:
     data = load_data(uploaded_file)
-    st.write("Sample data:")
-    st.write(data.head())
+    if data is not None:
+        st.write("Sample data:")
+        st.write(data.head())
 
-    topics = generate_topics(data)
-    data['topic'] = topics
-    st.write("Data with topics:")
-    st.write(data)
+        topics = generate_topics(data)
+        data['topic'] = topics
+        st.write("Data with topics:")
+        st.write(data)

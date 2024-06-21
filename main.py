@@ -26,7 +26,7 @@ def create_model(data, n_gram_range=(1, 3)):
 
 # Generate topics for the data
 def generate_topics(data):
-    n_gram_range = (1, 1)  # Adjust the n-gram range if necessary
+    n_gram_range = (1, 3)  # Adjust the n-gram range if necessary
     topics = create_model(data, n_gram_range)
     return topics
 

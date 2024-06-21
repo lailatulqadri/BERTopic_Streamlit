@@ -15,7 +15,7 @@ def load_data():
     return None
 
 # Perform BERTopic modeling
-@st.cache_resource(allow_output_mutation=True)
+@st.cache_resource
 def create_model(data):
     if data is not None:
         model = BERTopic(language="english", calculate_probabilities=True, verbose=True)

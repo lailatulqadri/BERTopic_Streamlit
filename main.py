@@ -35,8 +35,10 @@ def main():
         if model is not None:
             st.write('Number of topics:', model.get_topic_freq().shape[0] - 1)
 
-            topic_to_visualize = st.slider('Select topic to visualize', min_value=0, max_value=model.get_topic_freq().shape[0] - 2, value=0, step=1)
-            st.write(model.visualize_distribution(probs[topic_to_visualize]))
+            #topic_to_visualize = st.slider('Select topic to visualize', min_value=0, max_value=model.get_topic_freq().shape[0] - 2, value=0, step=1)
+            #st.write(model.visualize_distribution(probs[topic_to_visualize]))
+            document_index = st.slider('Select document to visualize', min_value=0, max_value=len(probs) - 1, value=0, step=1)
+            st.write(model.visualize_distribution(probs[document_index]))
         else:
             st.write("Please upload a CSV file.")
     else:

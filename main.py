@@ -6,7 +6,7 @@ from bertopic import BERTopic
 from sklearn.datasets import fetch_20newsgroups
 
 # Load your data
-@st.cache_data
+#@st.cache_data
 def load_data():
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)

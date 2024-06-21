@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import bertopic
+from bertopic import BERTopic
 import numpy as np
 
 def bertopic_wrapper(data):

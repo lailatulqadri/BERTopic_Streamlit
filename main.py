@@ -48,9 +48,7 @@ min_topic_size = st.number_input("Minimum Topic Size", min_value=2, max_value=50
 # Nr of Top Words
 nr_topics = st.number_input("Number of Top Words", min_value=2, max_value=30, value=10)
 st.write('Note:')
-st.info("Number of Topic : defines the number of topics BERTopic should try to extract from the corpus. 
-        \n Minimum Topic Size: specifies the minimum number of documents that should be present in a topic. 
-        \n Number of Top Words: provide descriptions here", icon="ℹ️")
+st.info("Number of Topic : defines the number of topics BERTopic should try to extract from the corpus", icon="ℹ️")
 
 # Input text from user
 user_input = st.text_area("Enter text:")

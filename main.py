@@ -17,9 +17,9 @@ def load_data(uploaded_file):
 
 # Perform BERTopic modeling
 #@st.cache_resource
-def create_model(data, n_gram_range=(1, 3)):
+def create_model(data, n_gram_range=(1, 3),num_topics, min_topic_size, nr_topics):
     texts = data['text'].tolist()
-    model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True)
+    model = BERTopic(n_gram_range=n_gram_range, calculate_probabilities=True,nr_topics=num_topics, min_topic_size=min_topic_size, nr_top_words=nr_topics)
     topics, _ = model.fit_transform(texts)
     st.write(model.get_topic_info())
     fig = model.visualize_topics()
@@ -42,11 +42,11 @@ st.title('BERTopic with Streamlit')
 st.write("Please provide BERTopic parameters as follows:")
 # Number of Topics
 
-num_topics = st.number_input("Number of Topics", min_value=2, max_value=50, value=10)
+num_topics = st.number_input("Number of Topics", min_value=2, max_value=50, value=5)
 # Min Topic Size
-min_topic_size = st.number_input("Minimum Topic Size", min_value=2, max_value=50, value=10)
+min_topic_size = st.number_input("Minimum Topic Size", min_value=2, max_value=50, value=5)
 # Nr of Top Words
-nr_topics = st.number_input("Number of Top Words", min_value=2, max_value=30, value=10)
+nr_topics = st.number_input("Number of Top Words", min_value=2, max_value=30, value=5)
 st.write('Note:')
 st.info("Number of Topic : defines the number of topics BERTopic should try to extract from the corpus", icon="ℹ️")
 

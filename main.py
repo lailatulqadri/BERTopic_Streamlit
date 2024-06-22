@@ -67,7 +67,7 @@ if uploaded_file:
         st.write("Sample data:")
         st.write(data.head())
 
-        topics = generate_topics(data)
+        topics = generate_model(data)
         data['topic'] = topics
         st.write("Data with topics:")
         st.write(data)

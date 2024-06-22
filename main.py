@@ -29,10 +29,10 @@ def create_model(data,num_topics, min_topic_size, nr_topics):
     return topics
 
 # Generate topics for the data
-def generate_topics(data):
-    n_gram_range = (1, 3)  # Adjust the n-gram range if necessary
-    topics = create_model(data, n_gram_range)
-    return topics
+#def generate_topics(data):
+#    n_gram_range = (1, 3)  # Adjust the n-gram range if necessary
+#    topics = create_model(data, n_gram_range)
+#    return topics
 
 # Streamlit UI
 st.title('BERTopic with Streamlit')

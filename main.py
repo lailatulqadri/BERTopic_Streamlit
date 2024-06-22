@@ -19,7 +19,8 @@ def load_data(uploaded_file):
 #@st.cache_resource
 def create_model(data,num_topics, min_topic_size, nr_topics):
     texts = data['text'].tolist()
-    model = BERTopic(calculate_probabilities=True,nr_topics=num_topics, min_topic_size=min_topic_size, nr_top_words=nr_topics)
+    n_gram_range=(1,3)
+    model = BERTopic(n_gram_range,calculate_probabilities=True,nr_topics=num_topics, min_topic_size=min_topic_size, nr_top_words=nr_topics)
     topics, _ = model.fit_transform(texts)
     st.write(model.get_topic_info())
     fig = model.visualize_topics()

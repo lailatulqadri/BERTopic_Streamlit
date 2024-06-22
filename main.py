@@ -41,16 +41,18 @@ st.title('BERTopic with Streamlit')
 # Streamlit UI
 st.write("Please provide BERTopic parameters as follows:")
 # Number of Topics
-st.write("Please provide BERTopic parameters")
+
 num_topics = st.number_input("Number of Topics", min_value=2, max_value=50, value=10)
 # Min Topic Size
 min_topic_size = st.number_input("Minimum Topic Size", min_value=2, max_value=50, value=10)
 # Nr of Top Words
 nr_topics = st.number_input("Number of Top Words", min_value=2, max_value=30, value=10)
 st.write('Note:')
+st.info('This is a purely informational message', icon="ℹ️")
 st.write('Number of Topic: defines the number of topics that BERTopic should try to extract from the corpus. If set to a specific number, the model will attempt to generate exactly that many topics.')
 st.write('Minimum Topic Size: specifies the minimum number of documents that should be present in a topic. Topics with fewer documents than this threshold will be merged with other topics.')
-st.wrire('Number of Top Words: provide description here')
+st.write('Number of Top Words: provide description here')
+
 # Input text from user
 user_input = st.text_area("Enter text:")
 
